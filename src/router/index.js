@@ -20,12 +20,18 @@ const router = createRouter({
           title: 'Home',
           path: '/',
           name: 'home',
+          props: {
+            default: true
+          },
           component: HeroView
         },
         {
           title: 'Chat',
-          path: '/chat',
+          path: '/chat/:chat',
           name: 'chat',
+          props: {
+            default: true
+          },
           component: ChatView
         },
       ]
