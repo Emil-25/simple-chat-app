@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection } from 'firebase/firestore'
+import { getStorage, ref } from "firebase/storage";
 
 // ... other firebase imports
 
@@ -15,9 +16,13 @@ export const firebaseApp = initializeApp({
 })
 
 const db = getFirestore(firebaseApp)
+const storage = getStorage(firebaseApp)
 
 // here we can export reusable database references
 export const usersRef = collection(db, 'users');
 export const chatRoomsRef = collection(db, 'chatrooms');
+
+export const imagesRef = ref(storage, 'images');
+
 
 

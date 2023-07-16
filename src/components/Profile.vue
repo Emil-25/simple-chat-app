@@ -8,7 +8,7 @@
             </q-item-section>
             <q-item-section>
                 <q-item-label>{{ chattingWith.name }}</q-item-label>
-                <q-item-label v-if="messages.value && messages.value.length > 0" caption>{{ messages.value.at(-1).message }}</q-item-label>
+                <q-item-label v-if="messages.value && messages.value.length > 0" caption>{{ messages.value.at(-1).message? messages.value.at(-1).message : 'Image' }}</q-item-label>
             </q-item-section>
             <q-item-section>
                 <q-item-label v-if="messages.value && messages.value.length > 0" caption>{{ new Date(messages.value.at(-1).time.seconds*1000).toLocaleString().split(',')[1] }}</q-item-label>
