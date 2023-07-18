@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import HeroView from '../views/HeroView.vue'
 import ChatView from '../views/ChatView.vue'
+import { getCurrentUser } from 'vuefire'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +11,7 @@ const router = createRouter({
      {
       title: 'Login Page',
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component : () => import('../views/LoginView.vue')
     },
     {

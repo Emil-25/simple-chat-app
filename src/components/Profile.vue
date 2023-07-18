@@ -58,5 +58,4 @@
         messages.value = useCollection(collection(docRef, 'messages'));
     }
     getChattingWith()
-
 </script>

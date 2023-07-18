@@ -1,12 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import Profile from '../components/Profile.vue'
-import { onMounted, ref } from 'vue' 
+import { onMounted, ref, watch } from 'vue' 
 import { setDoc, doc, updateDoc, query, where, getDocs } from "firebase/firestore";
 import { usersRef, chatRoomsRef } from '../firebase'
-import { getCurrentUser } from 'vuefire'
+import { getCurrentUser, useCurrentUser } from 'vuefire'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import { signOut, getAuth } from 'firebase/auth';
+import { useRouter } from 'vue-router'
 
 
 onMounted(async () => {
@@ -22,10 +24,19 @@ onMounted(async () => {
 
 })
 
+const isAuthenticated = useCurrentUser()
+
 const leftDrawerOpen = ref(true)
 const prompt = ref(false)
 const email = ref('')
+const auth = getAuth()
 const users = ref([])
+const router = useRouter()
+
+const SignOut = () => {
+    signOut(auth)
+    router.push('/login')
+}
 
 const toggleLeftDrawer = () => {
     leftDrawerOpen.value = !leftDrawerOpen.value
@@ -70,30 +81,35 @@ const getUsersToChat = async () => {
     })
 }
 
+
 </script>
 
 <template>
-    <q-layout view="hHh lpR fFf">
+    <q-layout view="hHh lpR fFf" class="bg-green-100">
   
-      <q-header elevated class="bg-primary text-white">
+      <q-header elevated class="bg-positive text-white">
         <q-toolbar>
           <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
   
           <q-toolbar-title>
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+            <q-avatar square>
+              <img src="../assets/images/logo.png">
             </q-avatar>
-            Title
+            ChitChat
           </q-toolbar-title>
+
+          <q-btn v-if="isAuthenticated" color="red" @click="SignOut">Sign Out</q-btn>
+          <q-btn v-else color="red" @click="() => router.push('/login')">Sign In</q-btn>
+        
         </q-toolbar>
       </q-header>
   
-      <q-drawer show-if-above v-model='leftDrawerOpen' side="left" behavior="desktop" bordered>
+      <q-drawer show-if-above v-model='leftDrawerOpen' side="left" behavior="desktop" bordered class="bg-green-200">
         <Profile v-for="user of users" :email="user.email"
         ></Profile>
 
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn fab icon="add" color="accent" @click="prompt = true"/>
+            <q-btn fab icon="add" color="positive" @click="prompt = true"/>
         </q-page-sticky>
 
 
