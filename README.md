@@ -1,6 +1,18 @@
-# simple-chat-app
 
-This template should help get you started developing with Vue 3 in Vite.
+## [Chit Chat App](https://emil-25.github.io/simple-chat-app/)
+
+## Project Title
+
+Chit Chat
+
+## Project Description
+
+This is a simple chat application where you can add users by email and start chatting with them. All you have to do is to click on plus button and writing the email of your friend the tapping add. You can also send image files.
+
+## Technical Part
+
+Firebase is utilized as a backend service. Several Firebase services are used including Authentication via Google, Firestore Database and Storage. 
+For frontend design Quasar framework is made use of.
 
 ## Recommended IDE Setup
 
