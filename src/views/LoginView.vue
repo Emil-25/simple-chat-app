@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 
 const provider = new GoogleAuthProvider()
@@ -22,7 +22,7 @@ const auth = getAuth()
 const router = useRouter()
 
 const signUp = () => {
-  signInWithRedirect(auth, provider)
+  signInWithPopup(auth, provider)
   router.push('/')
 }
 </script>
